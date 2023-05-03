@@ -1,10 +1,12 @@
 # Microprocessor & Assembly Language Lab
 
-- Language: **Assembley Language**
-- Part-3, Even Semester
-- Course Code: **CSE3232**
-- Course Title: **Microprocessor & Assembly Language Lab**
-- Depertment: **Computer Scince & Engineering**
+| 	Course Information	 | 	
+| 	:-----:	 | 	
+| 	Language: **Assembley Language**	| 	
+| 	Part-3, Even Semester	|  
+| 	Course Code: **CSE3232**	| 	 
+| 	Course Title: **Microprocessor & Assembly Language Lab**	| 
+| 	Depertment: **Computer Scince & Engineering**	| 
 
 ## Lab Manual
 
