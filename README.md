@@ -1,6 +1,5 @@
 # Microprocessor & Assembly Language Lab
 
-|   :-----: |
 | 	***Course Information***	 | 	
 | 	:-----	 | 	
 | 	Language: **Assembley Language**	| 	
