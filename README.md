@@ -1,7 +1,7 @@
 # Microprocessor & Assembly Language Lab
 
 | 	***Course Information***	 | 	
-| 	:-----:	 | 	
+| 	:-----	 | 	
 | 	Language: **Assembley Language**	| 	
 | 	Part-3, Even Semester	|  
 | 	Course Code: **CSE3232**	| 	 
