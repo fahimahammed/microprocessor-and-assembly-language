@@ -1,6 +1,6 @@
 # Microprocessor & Assembly Language Lab
 
-| 	Course Information	 | 	
+| 	***Course Information***	 | 	
 | 	:-----:	 | 	
 | 	Language: **Assembley Language**	| 	
 | 	Part-3, Even Semester	|  
