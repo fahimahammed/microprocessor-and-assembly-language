@@ -1,0 +1,37 @@
+.MODEL SMALL
+.STACK 100H
+
+.DATA
+IN_MSG DB 'ENTER THE LOWER CASE LETTER: $'
+OUT_MSG DB 0DH, 0AH, 'THE UPPER CASE LETTER IS: $'
+
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+    
+    LEA DX, IN_MSG
+    MOV AH, 9
+    INT 21H 
+    
+    MOV AH, 1
+    INT 21H
+    
+    MOV BL, AL  
+    
+    
+    LEA DX, OUT_MSG
+    MOV AH, 9
+    INT 21H
+    
+    SUB BL, 20H
+    
+    MOV AH, 2
+    MOV DL, BL
+    INT 21H
+    
+    
+    MOV AH, 4CH
+    INT 21H
+    MAIN ENDP
+END MAIN
