@@ -2,60 +2,61 @@
 .STACK 100H
 .DATA
 
-INPUT_STRING DB 100 DUP ('$')               ; define a buffer to store string
-INPUT_MSG DB 'ENTER YOUR STRING: $'         ; msg prompt for input
-OUTPUT_MSG DB 0DH, 0AH, 'OUTPUT STRING: $'  ; msg prompt for output
-                                            
+MYSTR DB 100 DUP ('$')
+INPUT_MSG DB 'ENTER YOUR STRING: $'
+OUTPUT_MSG DB 0AH, 0DH, 'OUTPUT: $'
+
+
 .CODE
 MAIN PROC
     MOV AX, @DATA
     MOV DS, AX
     
+    ;SHOW INPUT MSG
     MOV AH, 9
     LEA DX, INPUT_MSG
-    INT 21H
+    INT 21H 
     
-       
-    ; take input
+    ;INPUT STRING
     MOV AH, 1
-    XOR CX, CX  ; clear CX register to be used as a counter
-    XOR SI, SI  ; clear SI register to be used as an index
+    XOR CX, CX ; CLEAR CX REGISTER TO BE USED AS A COUNTER
+    XOR SI, SI ; CLEAR SI REGISTER TO BE USED AS A INDEX
     INPUT:
         INT 21H
-        CMP AL, 0DH        ; check if the input is a carriage return
-        JE EXIT_FROM_INPUT
+        CMP AL, 0DH
+        JE EXIT_LOOP
         
-        MOV INPUT_STRING[SI], AL  ; store the input in the buffer
-        INC CX     
+        MOV MYSTR[SI], AL ; STORE THE INPUT IN THE BUFFER
+        INC CX
         INC SI
+        
         JMP INPUT
-    EXIT_FROM_INPUT:
-    
+    EXIT_LOOP:
+     
+    ;SHOW OUTPUT MSG 
     MOV AH, 9
     LEA DX, OUTPUT_MSG
     INT 21H 
     
-    ; convert case
-    XOR SI, SI  
-    
-    LOOP_THROUGH_STR:
-        MOV DL, INPUT_STRING[SI]
+    XOR SI, SI ; CLEAR SI REGISTER TO BE USED AS A INDEX
+    LOOP_THROUGH_MYSTR:
+        MOV DL, MYSTR[SI]
         
         CMP DL, 61H
-        JL CHECK_UPPERCASE   ;  60, 59 ...., upper case
+        JL CHECK_UPPERCASE
         
-        CMP DL, 7AH          
-        JG PRINT             ; z, y, x .....
+        CMP DL, 7AH
+        JG PRINT
         
         SUB DL, 20H
         JMP PRINT
         
         CHECK_UPPERCASE:
-            CMP DL, 41H      
-            JL PRINT         ; @, ?, > ,.....
-            
             CMP DL, 5AH
-            JG PRINT         ; Z, Y, X, .....
+            JG PRINT
+            
+            CMP DL, 41H
+            JL PRINT
             
             ADD DL, 20H
             JMP PRINT
@@ -63,14 +64,14 @@ MAIN PROC
         PRINT:
             MOV AH, 2
             INT 21H
+            INC SI
         
-        INC SI
-        LOOP  LOOP_THROUGH_STR 
+        LOOP LOOP_THROUGH_MYSTR
         
-        MOV AH, 4CH
-        INT 21H
-        
+            
     
+    MOV AH, 4CH
+    INT 21H
     
-ENDP MAIN
+    MAIN ENDP
 END MAIN
