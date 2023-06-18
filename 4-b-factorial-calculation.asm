@@ -1,0 +1,62 @@
+.MODEL SMALL
+.STACK 100H
+.DATA 
+INPUT_MSG DB 'ENTER A NUMBER: $'
+OUTPUT_MSG DB 'FACTORIAL IS- $'
+N DB 0D
+FACT DB 0D
+
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+    
+    MOV AH, 9
+    LEA DX, INPUT_MSG
+    INT 21H
+    
+    MOV AH, 1
+    INT 21H
+    SUB AL, 48D
+    CMP AL, 0D
+    JE FACT_FOR_ZERO
+    
+    MOV N, AL
+    FIND_FACT:
+        DEC N
+        CMP N, 0D
+        JE PRINT_FACT
+        
+        MUL N
+    JMP FIND_FACT
+    
+    FACT_FOR_ZERO:
+        MOV AL, 1D
+    
+    PRINT_FACT:
+        ADD AL, 48D
+        MOV FACT, AL
+    
+    CALL NEW_LINE
+    MOV AH, 9
+    LEA DX, OUTPUT_MSG
+    INT 21H
+        
+    MOV AH, 2
+    MOV DL, FACT
+    INT 21H
+    
+    MOV AH, 4CH
+    INT 21H
+    MAIN ENDP 
+
+NEW_LINE PROC
+    MOV AH,2
+    MOV DL,0DH
+    INT 21H
+    MOV DL,0AH
+    INT 21H
+    RET
+NEW_LINE ENDP
+
+END MAIN
